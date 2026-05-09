@@ -1,6 +1,10 @@
 <div id="map" style="width: 100%; height: 100vh;"></div>
 
 <script>
+
+    var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png');
+    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+
     var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
     });
@@ -12,12 +16,14 @@
     const map = L.map('map', {
         center: [-7.192130739980943, 113.24603877572697],
         zoom: 14,
-        layers: [osmHOT]
+        layers: [Esri_WorldImagery]
     });
 
     const baseLayers = {
-        'Layer 2': osmHOT,
-        'Layer 1': osm
+        'OpenStreetMapHOT': osmHOT,
+        'OpenStreetMap': osm,
+        'OpenTopoMap': OpenTopoMap,
+        'ESRI_Satellite': Esri_WorldImagery
     };
 
     const layerControl = L.control.layers(baseLayers, null, {
